@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 👜 Bagella – Bag Ecommerce Store
 
-## Getting Started
+> Bagella is an ecommerce website, designed to offer shopping experience for high-quality bags across Europe. Customers can browse make collections, filter products, view details, and securely purchase bags from any device.
 
-First, run the development server:
+---
+## 🛠  Built With
 
+## Tech Stack
+
+- ![Next.js](https://nextjs.org/)
+- ![TypeScript](https://www.typescriptlang.org/)
+- ![Tailwind CSS](https://tailwindcss.com/)
+- ![Stripe – (for secure payments](https://stripe.com/)
+- ![Cloudinary – (for product images / CMS)](https://cloudinary.com/)
+
+---
+
+### ✨ Key Features
+
+- [👜] Browse and filter bags by type, price, and popularity
+- [💳] Secure checkout with Stripe integration
+- [🧭🔍] Fast and Real-time search, Product Filtering and category exploration
+- [📱] Responsive design across desktop and mobile devices
+- [💡] Built with performance and SEO in mind
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🚀 Live Demo
+
+- [Live Demo on Vercel](https://bagella.vercel.app)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 💻 Getting Started
+
+To get a local copy up and running, follow these steps.
+
+### ✅ Prerequisites
+
+In order to run this project, you need:
+
+- Node.js installed
+- npm or yarn
+- Basic knowledge of Next.js and TypeScript
+
+### ⚙️ Setup
+
+1. Clone this repository to your desired folder:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone git@github.com:mrkamin/bagella.git
+
+- Navigate into the cloned folder
+
+```sh
+ cd bagella
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Install
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Install this project with:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+ npm install
+```
 
-## Learn More
+- Start the server
 
-To learn more about Next.js, take a look at the following resources:
+```sh
+ npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<!-- AUTHORS -->
 
-## Deploy on Vercel
+## 👥 Authors <a name="authors"></a>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+👤 **Mohammad Rafi Amin**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- GitHub: [@githubhandle](https://github.com/mrkamin)
+- Twitter: [@twitterhandle](https://twitter.com/Mohamma63974237)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/mohammad-rafi-amin-63b4319b/)
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- FUTURE FEATURES -->
+
+## 🔭 Future Features <a name="future-features"></a>
+ 
+- [] Customer account system and order history
+
+- [] Product reviews and ratings
+
+- [] Multi-language support (EN, FR, DE, etc.)
+
+- [] Newsletter integration with Mailchimp
+
+- [] Admin dashboard to manage products
+
+- [] Blog section for fashion & care tips
+
+- [] Loyalty/reward program
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- SUPPORT -->
+
+## ⭐️ Show your support <a name="support"></a>
+
+If you like this project please give it a ⭐️. Your support is greatly appreciated!
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
+
+## 📝 License <a name="license"></a>
+
+This project is [MIT](./LICENSE) licensed.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
