@@ -7,11 +7,11 @@
 
 ## Tech Stack
 
-- ![Next.js](https://nextjs.org/)
-- ![TypeScript](https://www.typescriptlang.org/)
-- ![Tailwind CSS](https://tailwindcss.com/)
-- ![Stripe – (for secure payments](https://stripe.com/)
-- ![Cloudinary – (for product images / CMS)](https://cloudinary.com/)
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Stripe – (for secure payments](https://stripe.com/)
+- [Cloudinary – (for product images / CMS)](https://cloudinary.com/)
 
 ---
 
