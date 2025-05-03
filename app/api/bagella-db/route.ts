@@ -1,8 +1,9 @@
+// app/api/bagella-db/route.ts
+import { NextResponse } from 'next/server';
 import { connectToDB } from "@/lib/connectToDB";
 import Product from "@/models/productModel";
-import { ProductType } from "@/types/Types";
 
-export async function getproducts(): Promise<ProductType[]> {
+export async function GET() {
   try {
     await connectToDB();
     const products = await Product.find({}).lean();
@@ -16,9 +17,9 @@ export async function getproducts(): Promise<ProductType[]> {
       description: product.description,
     }));
 
-    return formatted;
+    return NextResponse.json(formatted);
   } catch (err) {
-    console.log("error:", err);
-    return [];
+    console.error("error:", err);
+    return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
   }
 }
