@@ -1,7 +1,7 @@
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
 import Image from 'next/image'
 import { ProductType } from '@/types/Types';
-import { Button } from './ui/button';
+import Buy from './Buy'
 
 interface ProductProps {
   product: ProductType;
@@ -30,7 +30,7 @@ const Item = ({product}: ProductProps) => {
         <span className='text-xl text-primary font-medium'>
         £{product.price}
         </span>
-        <Button>Purchase</Button>
+        <Buy id={product._id.toString()} />
       </CardFooter>
     </Card>
   )
