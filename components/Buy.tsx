@@ -59,7 +59,7 @@ const Buy = ({ id }: BuyProps) => {
             </span>
           </DialogTitle>
           <EmbeddedCheckoutProvider options={options} stripe={stripePromise}>
-            <EmbeddedCheckout className="max-h-[80dvh]" />
+            <EmbeddedCheckout className="h-[80dvh] w-full overflow-y-auto" />
           </EmbeddedCheckoutProvider>
         </DialogHeader>
         <DialogFooter>
