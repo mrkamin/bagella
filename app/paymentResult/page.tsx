@@ -4,22 +4,13 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import TickIcon from "@/components/ui/Tickicon";
 
-interface PageProps {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
+type Props = {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
-async function getSession(sessionId: string) {
-  try {
-    const session = await stripe.checkout.sessions.retrieve(sessionId);
-    return session;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-}
-
-const Page = async ({ searchParams }: PageProps) => {
-  const sessionId = searchParams?.session_id;
+export default async function Page({ searchParams }: Props ) {
+  const params = await searchParams;
+  const sessionId = params?.session_id;
 
   if (!sessionId || Array.isArray(sessionId)) {
     redirect("/");
@@ -31,11 +22,11 @@ const Page = async ({ searchParams }: PageProps) => {
     return <h1>Invalid session!</h1>;
   }
 
-  if (session?.status === "expired") {
+  if (session.status === "expired") {
     return <h1>Your session expired</h1>;
   }
 
-  if (session?.status === "open") {
+  if (session.status === "open") {
     return <h1>Your payment is in Progress!</h1>;
   }
 
@@ -55,6 +46,13 @@ const Page = async ({ searchParams }: PageProps) => {
       </Link>
     </div>
   );
-};
+}
 
-export default Page;
+async function getSession(sessionId: string) {
+  try {
+    return await stripe.checkout.sessions.retrieve(sessionId);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
