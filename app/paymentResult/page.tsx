@@ -3,10 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import TickIcon from "@/components/ui/Tickicon";
-
-type Props = {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
+import { Props } from "@/types/Types";
 
 export default async function Page({ searchParams }: Props ) {
   const params = await searchParams;
