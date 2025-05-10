@@ -4,7 +4,6 @@ import Product from "@/models/productModel";
 import { stripe } from '@/lib/Stripe';
 import { ProductType } from '@/types/Types';
 
-
 export async function GET() {
   try {
     await connectToDB();

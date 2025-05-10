@@ -1,11 +1,8 @@
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
 import Image from 'next/image'
-import { ProductType } from '@/types/Types';
+import { ProductProps } from '@/types/Types';
 import Buy from './Buy'
 
-interface ProductProps {
-  product: ProductType;
-}
 const Item = ({product}: ProductProps) => {
   return (
     <Card className='flex flex-col p-0 relative m-0 overflow-hidden'>
