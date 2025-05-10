@@ -153,24 +153,27 @@ const Dashboard = () => {
             </div>
             <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
-                    <h1 className="text-2xl mb-4 font-bold">Delete Product</h1> 
+                    <h1 className="text-2xl mb-4 font-bold">Delete & 
+                        Edit Product</h1> 
                 </div>
                  {loading ? <p>Loading...</p> : (
                     <>
-                        <table className="w-full table-auto border">
-                            <thead>
+                        <table className="min-w-full table-auto border">
+                            <thead className="bg-gray-50 w-full">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Actions</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Name</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Price</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Description</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody  className="bg-white divide-gray-200">
                                 {products.map((product) => (
                                     <tr key={product._id}>
-                                        <td>{product.name}</td>
-                                        <td>£{product.price}</td>
-                                        <td>
+                                        <td className="px-6 py-4 whitespace-nowrap">{product.name}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap">£{product.price}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap">{product.description}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
                                             <Button 
                                                 onClick={() => startEditing(product)}
                                                 className="mr-2"
