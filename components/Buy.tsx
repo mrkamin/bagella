@@ -21,24 +21,22 @@ const stripePromise = loadStripe(
   })()
 );
 
-const Buy = ({ id }: BuyProps) => {
+const Buy = ({ id, items, totalAmount }: BuyProps) => {
   const fetchClientSecret = useCallback(async () => {
-    try {
+    const body = id ? { id } : { items, totalAmount };
+    
       const res = await fetch("/api/bagella-db", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id }),
+        body: JSON.stringify(body),
       });
 
       const data = await res.json();
       if (data?.error) throw new Error("Something went wrong!");
       return data.client_secret;
-    } catch (error) {
-      throw error;
-    }
-  }, [id]);
+  }, [id, items, totalAmount]);
 
   const options = { fetchClientSecret };
 
