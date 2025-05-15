@@ -10,22 +10,10 @@ export interface ProductType {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
   };
   
-  export type BuyProps = {
-    id: string;
-  };
-
   export interface ProductProps {
     product: ProductType;
   }
 
-  export type CartItem = {
-    id: string;
-    name: string;
-    price: number;
-    image: string;
-    quantity: number;
-  };
-  
   export type CartContextType = {
     cart: CartItem[];
     addToCart: (item: CartItem) => void;
@@ -34,3 +22,31 @@ export interface ProductType {
     totalItems: number;
     totalAmount: number;
   };
+
+  export type Product = {
+    _id: string;
+    name: string;
+    description: string;
+    price: number;
+    image: string;
+    popularity?: number;
+  };
+
+  export interface CartItem {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  quantity: number;
+}
+
+export type BuyProps =
+  | { id: string; items?: never; totalAmount?: never } // single item
+  | { items: CartItem[]; totalAmount: number; id?: never }; // cart
+
+export interface ItemType {
+  name: string;
+  image: string;
+  price: number;
+  quantity: number;
+}
