@@ -2,8 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { ProductType } from "@/types/Types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Dashboard = () => {
     const [products, setProducts] = useState<ProductType[]>([]);
@@ -11,17 +12,44 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const [editingProduct, setEditingProduct] = useState<ProductType | null>(null);
     const router = useRouter();
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+    const [isClient, setIsClient] = useState(false);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    useEffect(() => setIsClient(true), []);
 
     const addProduct = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        if (!newProduct.name || !newProduct.price || !newProduct.description || !selectedFile) {
+            alert("Please fill in all fields and select an image.");
+            return;
+        }
+
         try {
+            const formData = new FormData();
+            formData.append("file", selectedFile);
+            formData.append("upload_preset", "bagella" );
+    
+            const response = await fetch("https://api.cloudinary.com/v1_1/dagjuuf4v/image/upload", {
+                method: "POST",
+                body: formData,
+            });
+    
+            const data = await response.json();
+            
             const res = await fetch('/admin/add', {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(newProduct),
+                body: JSON.stringify({
+                    ...newProduct,
+                    image: data.secure_url,
+            }),
             });
             if (res.ok) {
-                setNewProduct({name: "", price: "", image: "", description: ""})
+                setNewProduct({name: "", price: "", image: "", description: ""});
+                setPreviewUrl(null);
+                if (fileInputRef.current) fileInputRef.current.value = "";
                 fetchProducts();
             }
         } catch (error) {
@@ -29,6 +57,20 @@ const Dashboard = () => {
             
         }
     }
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setSelectedFile(file)
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPreviewUrl(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+    }
+
     const fetchProducts = async () => {
         const response = await fetch('/api/bagella-db');
         const data = await response.json();
@@ -111,6 +153,8 @@ const Dashboard = () => {
         setEditingProduct({...editingProduct, [name]: name === 'price' ? Number (value): value});
     };
 
+    
+
     return (
         <>
             <div className="p-6">
@@ -135,12 +179,34 @@ const Dashboard = () => {
                         className="border p-2 w-full"
                     />
                     <input
-                        type="text"
-                        placeholder="Image URL"
-                        value={newProduct.image}
-                        onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
+                        type="file"
+                        accept="image/*"
+                        ref={fileInputRef}
+                        onChange={handleImageUpload}
                         className="border p-2 w-full"
+                        style={{ display: 'none' }}
                     />
+                    <Button 
+                        type="button" 
+                        onClick={() => fileInputRef.current?.click()}
+                    >
+                        Upload Image
+                    </Button>
+                    {isClient && previewUrl && (
+                    <div className="">
+                        <p className="text-sm text-gray-600 mb-2">Image Preview:</p>
+                        <div className="mt-4 relative h-32 w-32">
+                            <Image
+                                src={previewUrl}
+                                alt="Preview"
+                                layout="fill"
+                                objectFit="cover"
+                                className="rounded border !h-32 !w-32"
+                            />
+                        </div>
+                    </div>
+                    )}
+                    
                     <textarea
                         placeholder="Description"
                         value={newProduct.description}
@@ -149,7 +215,6 @@ const Dashboard = () => {
                     />
                     <Button type="submit">Add Product</Button>
                 </form>
-                {/* Existing product list rendering */}
             </div>
             <div className="p-6">
                 <div className="flex justify-between items-center mb-4">

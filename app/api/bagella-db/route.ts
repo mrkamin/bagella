@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectToDB } from "@/lib/connectToDB";
 import Product from "@/models/productModel";
 import { stripe } from '@/lib/Stripe';
-import { ProductType } from '@/types/Types';
+import { ItemType, ProductType } from '@/types/Types';
 
 export async function GET() {
   try {
@@ -27,28 +27,47 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
-    await connectToDB()
+    await connectToDB();
+    let line_items = [];
+    if (data.id) {
     const product = await Product.findById(data.id);
     if (!product) {
       return NextResponse.json({error: "Product not found!"},
         {status: 400}
       )
     }
+    line_items.push({
+        price_data: {
+          unit_amount: product.price * 100,
+          currency: "usd",
+          product_data: {
+            name: product.name,
+            images: [product.image],
+          },
+        },
+        quantity: 1,
+      });
+    } else if (data.items && Array.isArray(data.items)) {
+
+          line_items = data.items.map((item: ItemType) => ({
+        price_data: {
+          unit_amount: item.price * 100,
+          currency: "usd",
+          product_data: {
+            name: item.name,
+            images: [item.image],
+          },
+        },
+        quantity: item.quantity,
+      }));
+    } else {
+      return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    }
+
+
     const session = await stripe.checkout.sessions.create({
       ui_mode: "embedded",
-      line_items: [
-        {
-          price_data: {
-            unit_amount: product.price * 100,
-            currency: "usd",
-            product_data: {
-              name: product.name,
-              images: [product.image],
-            },
-          },
-          quantity: 1
-        }
-      ],
+      line_items,
       custom_fields: [
         {
           key: "location",
@@ -60,7 +79,7 @@ export async function POST(request: NextRequest) {
       payment_method_types: ["card"],
       mode: "payment",
       return_url: `${request.headers.get(
-        "referer"
+        "origin"
       )}/paymentResult?session_id={CHECKOUT_SESSION_ID}`,
     });
     return NextResponse.json({

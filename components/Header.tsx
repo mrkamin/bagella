@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ShoppingCart } from "lucide-react";
-
+import { useCart } from "@/context/Cartcontext";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -14,7 +14,7 @@ const navLinks = [
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  
+  const {totalItems} = useCart();
 
   return (
     <header className="w-full border-b sticky top-0 bg-white z-50 shadow-sm">
@@ -38,7 +38,11 @@ const Header = () => {
           {/* Cart Icon with Badge */}
           <Link href="/cart" className="relative">
             <ShoppingCart className="text-primary hover:text-secondary-foreground" size={24} />
-            
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
           </Link>
         </nav>
 
@@ -70,7 +74,20 @@ const Header = () => {
               </motion.div>
             )}
           </AnimatePresence>
-
+           <AnimatePresence>
+            {!isOpen && totalItems > 0 && (
+              <motion.span
+                key="badge"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                transition={{ duration: 0.5 }}
+                className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+              >
+                {totalItems}
+              </motion.span>
+            )}
+          </AnimatePresence>
           
         </button>
       </div>
@@ -94,7 +111,11 @@ const Header = () => {
             onClick={() => setIsOpen(false)}
             className="flex items-center gap-2 text-gray-700 hover:text-[#d4af37]"
           >
-            
+            <ShoppingCart size={20} />
+              Cart {totalItems > 0 && 
+                <span className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {`(${totalItems})`}
+                </span>}
           </Link>
         </nav>
       )}
