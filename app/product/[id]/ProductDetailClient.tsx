@@ -66,6 +66,7 @@ export default function ProductDetailClient({ product }: Props) {
                       name: product.name,
                       price: product.price,
                       image: product.image,
+                      productCode: product.productCode,
                       quantity: 1,
                     })
                   }
