@@ -50,6 +50,7 @@ export default function ProductDetailClient({ product }: Props) {
     name: product.name,
     image: product.image,
     price: product.price,
+    productCode: product.productCode,
     quantity: 1,
   }]}
   totalAmount={parseFloat(product.price.toString())}

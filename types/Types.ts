@@ -30,6 +30,7 @@ export interface ProductType {
     description: string;
     price: number;
     image: string;
+    productCode: string;
     popularity?: number;
   };
 
@@ -50,5 +51,6 @@ export interface ItemType {
   name: string;
   image: string;
   price: number;
+  productCode: string;
   quantity: number;
 }
