@@ -63,14 +63,14 @@ console.log('Fetched product:', product);
 
           <button aria-label="Add to wishlist" className="cursor-pointer group">
             <Heart className="text-primary hover:text-input" />
-            <div className="absolute -top-8 left-[25%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/80 text-xs px-2 py-1 rounded z-30 whitespace-nowrap">
+            <div className="absolute -top-6 left-[25%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/80 text-xs px-2 py-1 rounded z-30 whitespace-nowrap">
               Add To Favorite
             </div>
           </button>
 
           <button aria-label="Contact on WhatsApp" className="cursor-pointer group">
             <FaWhatsapp size={22} className="text-primary hover:text-input" />
-            <div className="absolute -top-8 right-[20%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/80 text-xs px-2 py-1 rounded z-30 whitespace-nowrap">
+            <div className="absolute -top-6 right-[20%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/80 text-xs px-2 py-1 rounded z-30 whitespace-nowrap">
               Order On Whatsapp
             </div>
           </button>
@@ -78,7 +78,7 @@ console.log('Fetched product:', product);
           <BuyDialog id={product._id.toString()}>
             <button className="cursor-pointer group">
               <ShoppingBag className="text-primary hover:text-input" />
-              <div className="absolute -top-8 right-[3%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/80 text-xs px-2 py-1 rounded z-30 whitespace-nowrap">
+              <div className="absolute -top-6 right-[3%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/80 text-xs px-2 py-1 rounded z-30 whitespace-nowrap">
                 Buy Now
               </div>
             </button>
