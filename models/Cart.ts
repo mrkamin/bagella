@@ -9,6 +9,11 @@ const CartSchema = new Schema({
       price: Number,
       quantity: Number,
       image: String,
+      productCode: {
+    type: String,
+    required: [true, "Product must have a product code."],
+    unique: true,
+  },
     },
   ],
 });

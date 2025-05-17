@@ -4,6 +4,7 @@ export interface ProductType {
     image: string;
     price: number;
     description: string;
+    productCode: string;
   }
 
   export type Props = {
@@ -37,6 +38,7 @@ export interface ProductType {
   name: string;
   image: string;
   price: number;
+  productCode: string;
   quantity: number;
 }
 

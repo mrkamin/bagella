@@ -8,7 +8,7 @@ import Image from "next/image";
 
 const Dashboard = () => {
     const [products, setProducts] = useState<ProductType[]>([]);
-    const [newProduct, setNewProduct] = useState({name: "", price: "", image: "", description: ""});
+    const [newProduct, setNewProduct] = useState({name: "", price: "", image: "", description: "", code: ""});
     const [loading, setLoading] = useState(true);
     const [editingProduct, setEditingProduct] = useState<ProductType | null>(null);
     const router = useRouter();
@@ -17,6 +17,14 @@ const Dashboard = () => {
     const [isClient, setIsClient] = useState(false);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     useEffect(() => setIsClient(true), []);
+
+
+    const generateProdutCode = (name: string) => {
+        const timestamp = Date.now().toString().slice(-6);
+        const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+        const namePart = name.substring(0, 3).toUpperCase();
+        return `${namePart}-${timestamp}-${random}`;
+    };
 
     const addProduct = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -37,17 +45,18 @@ const Dashboard = () => {
             });
     
             const data = await response.json();
-            
+            const generatedCode = generateProdutCode(newProduct.name);
             const res = await fetch('/admin/add', {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
                     ...newProduct,
                     image: data.secure_url,
+                    productCode: generatedCode
             }),
             });
             if (res.ok) {
-                setNewProduct({name: "", price: "", image: "", description: ""});
+                setNewProduct({name: "", price: "", image: "", description: "", code: ""});
                 setPreviewUrl(null);
                 if (fileInputRef.current) fileInputRef.current.value = "";
                 fetchProducts();
@@ -153,8 +162,6 @@ const Dashboard = () => {
         setEditingProduct({...editingProduct, [name]: name === 'price' ? Number (value): value});
     };
 
-    
-
     return (
         <>
             <div className="p-6">
@@ -229,6 +236,7 @@ const Dashboard = () => {
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Name</th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Price</th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Description</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Product Code</th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Actions</th>
                                 </tr>
                             </thead>
@@ -238,6 +246,7 @@ const Dashboard = () => {
                                         <td className="px-6 py-4 whitespace-nowrap">{product.name}</td>
                                         <td className="px-6 py-4 whitespace-nowrap">£{product.price}</td>
                                         <td className="px-6 py-4 whitespace-nowrap">{product.description}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap">{product.productCode}</td>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <Button 
                                                 onClick={() => startEditing(product)}
