@@ -54,6 +54,7 @@ export default function CartPage() {
                       name: item.name,
                       price: item.price,
                       image: item.image,
+                      productCode: item.productCode,
                       quantity: 1,
                     })
                   }
