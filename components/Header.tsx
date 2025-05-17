@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ShoppingCart } from "lucide-react";
+import { Menu, X, ShoppingCart, Atom } from "lucide-react";
 import { useCart } from "@/context/Cartcontext";
 
 const navLinks = [
@@ -19,7 +19,8 @@ const Header = () => {
   return (
     <header className="w-full border-b sticky top-0 bg-white z-50 shadow-sm">
       <div className="flex items-center justify-between p-4 max-w-7xl mx-auto">
-        <Link href="/" className="text-2xl font-bold text-primary">
+        <Link href="/" className="flex items-center text-2xl font-bold text-primary">
+        <Atom className="transition ease-in-out group-hover:stroke-primary" />
           Bagella
         </Link>
 

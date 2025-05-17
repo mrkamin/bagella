@@ -1,17 +1,19 @@
+
 "use client";
-import { Button } from "@/components/ui/button";
+
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogClose,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { BuyProps } from "@/types/Types";
-import { EmbeddedCheckout, EmbeddedCheckoutProvider } from "@stripe/react-stripe-js";
+import { Button } from "@/components/ui/button";
+import { EmbeddedCheckoutProvider, EmbeddedCheckout } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { BuyProps } from "@/types/Types";
 import { Atom } from "lucide-react";
 import { useCallback } from "react";
 
@@ -21,21 +23,21 @@ const stripePromise = loadStripe(
   })()
 );
 
-const Buy = ({ id, items, totalAmount }: BuyProps) => {
+const BuyDialog = ({ id, items, totalAmount, children }: BuyProps & { children: React.ReactNode }) => {
   const fetchClientSecret = useCallback(async () => {
     const body = id ? { id } : { items, totalAmount };
-    
-      const res = await fetch("/api/bagella-db", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
 
-      const data = await res.json();
-      if (data?.error) throw new Error("Something went wrong!");
-      return data.client_secret;
+    const res = await fetch("/api/bagella-db", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await res.json();
+    if (data?.error) throw new Error("Something went wrong!");
+    return data.client_secret;
   }, [id, items, totalAmount]);
 
   const options = { fetchClientSecret };
@@ -43,7 +45,7 @@ const Buy = ({ id, items, totalAmount }: BuyProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Purchase</Button>
+        {children}
       </DialogTrigger>
       <DialogContent className="my-4 py-12 lg:max-w-screen-xl">
         <DialogHeader>
@@ -67,4 +69,4 @@ const Buy = ({ id, items, totalAmount }: BuyProps) => {
   );
 };
 
-export default Buy;
+export default BuyDialog;

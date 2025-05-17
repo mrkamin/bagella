@@ -15,6 +15,7 @@ export async function GET() {
       image: product.image,
       price: product.price,
       description: product.description,
+      productCode: product.productCode,
     }));
 
     return NextResponse.json(formatted);
