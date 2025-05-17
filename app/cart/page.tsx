@@ -1,6 +1,6 @@
 "use client";
 
-import Buy from "@/components/Buy";
+import BuyDialog from "@/components/BuyDialog";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/Cartcontext";
 import { MinusIcon, Plus } from "lucide-react";
@@ -78,7 +78,9 @@ export default function CartPage() {
             >
               Clear Cart
             </button>
-              <Buy totalAmount={total} items={cart} />
+              <BuyDialog totalAmount={total} items={cart}>
+  <Button className="cursor-pointer">Buy Now</Button>
+</BuyDialog>
           </div>
           <div className="mt-10">
             <Link href="/">

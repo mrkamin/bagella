@@ -5,7 +5,7 @@ import { Product } from "@/types/Types"; // Create this if needed
 import { Button } from "@/components/ui/button";
 import { CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCart } from "@/context/Cartcontext";
-import Buy from "@/components/Buy";
+import BuyDialog from "@/components/BuyDialog";
 
 type Props = {
   product: Product | undefined;
@@ -43,8 +43,20 @@ export default function ProductDetailClient({ product }: Props) {
                 <span className='text-xl text-primary font-medium'>
                     £{product.price}
                 </span>
-                <CardFooter className='flex justify-between'>
-                <Buy id={product._id.toString()} />
+                <CardFooter className='flex justify-between gap-2'>
+               <BuyDialog
+  items={[{
+    id: product._id,
+    name: product.name,
+    image: product.image,
+    price: product.price,
+    quantity: 1,
+  }]}
+  totalAmount={parseFloat(product.price.toString())}
+>
+  <Button className="cursor-pointer">Buy Now</Button>
+</BuyDialog>
+
                 <Button 
                   onClick={() => { 
                     console.log("clicked ")
