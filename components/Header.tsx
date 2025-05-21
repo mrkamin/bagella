@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ShoppingCart, Atom } from "lucide-react";
 import { useCart } from "@/context/Cartcontext";
+import { signIn, signOut } from "next-auth/react";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -35,6 +36,10 @@ const Header = () => {
               {link.name}
             </Link>
           ))}
+           {/* Auth Buttons */}
+<button onClick={() => signIn()} className="text-primary hover:text-secondary transition">Sign In</button>
+<Link href="/signup" className="text-primary hover:text-secondary transition">Register</Link>
+<button onClick={() => signOut()} className="text-primary hover:text-secondary transition">Logout</button>
 
           {/* Cart Icon with Badge */}
           <Link href="/cart" className="relative">
