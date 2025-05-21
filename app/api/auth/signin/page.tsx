@@ -12,7 +12,7 @@ export default function SignInPage() {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const res = await signIn("credentials", {
       email,
@@ -33,7 +33,7 @@ export default function SignInPage() {
       <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="border rounded" />
       <Button type="submit">Sign In</Button>
       <div>
-        No Account 
+        No Account?{" "} 
       <Link href="/signup" className="text-primary hover:text-secondary transition"> Create One</Link>
       </div>
     </form>
