@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { signIn } from "next-auth/react";
 
 export default function SignUpPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -28,6 +29,10 @@ export default function SignUpPage() {
       <input placeholder="Email" onChange={e => setForm({ ...form, email: e.target.value })} className="border rounded" />
       <input type="password" placeholder="Password" onChange={e => setForm({ ...form, password: e.target.value })} className="border rounded" />
       <Button type="submit">Sign Up</Button>
+      <div>
+        Allready have Account {" "}
+      <button onClick={() => signIn()} className="text-primary hover:text-secondary transition">Sign In</button>
+      </div>
     </form>
   );
 }
