@@ -1,3 +1,5 @@
+import type { UserResource } from "@clerk/types";
+
 export interface ProductType {
     _id: string;
     name: string;
@@ -22,6 +24,7 @@ export interface ProductType {
     clearCart: () => void;
     totalItems: number;
     totalAmount: number;
+    user: UserResource | null | undefined;
   };
 
   export type Product = {

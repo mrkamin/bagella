@@ -1,4 +1,3 @@
-// app/layout.tsx or app/root/layout.tsx
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
@@ -6,6 +5,7 @@ import "../styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Providers from "./providers";
+import { ClerkProvider } from "@clerk/nextjs";
 
 
 type RootLayoutProps = {
@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body className={`${outfit.className} antialiased flex flex-col min-h-screen`}>
         <Providers>
@@ -35,5 +36,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </Providers>
       </body>
     </html>
+    </ClerkProvider>
   );
 }
