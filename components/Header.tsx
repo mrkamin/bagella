@@ -119,7 +119,7 @@ const Header = () => {
           </UserButton>
           </>
         :
-        <button onClick={() => openSignIn()} className="cursor-pointer flex">
+        <button onClick={() => openSignIn()} className="cursor-pointer flex text-primary hover:text-secondary transition">
             <UserIcon />
             Account
           </button>}
@@ -152,7 +152,7 @@ const Header = () => {
           </UserButton>
           </>
         :
-        <button onClick={() => openSignIn()} className="cursor-pointer flex">
+        <button onClick={() => openSignIn()} className="cursor-pointer place-items-center text-primary hover:text-secondary transition">
             <UserIcon />
             Account
           </button>}
