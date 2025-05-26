@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ShoppingCart, Atom, UserIcon, ListOrderedIcon } from "lucide-react";
+import { Menu, X, ShoppingCart, Atom, UserIcon, ListOrderedIcon, Search } from "lucide-react";
 import { useCart } from "@/context/Cartcontext";
 import { useClerk, UserButton } from "@clerk/nextjs";
 
@@ -18,17 +18,17 @@ const Header = () => {
   const {totalItems, user} = useCart();
   const {openSignIn} = useClerk();
 
-  const cartIcon = () => (
+  const cartIcon = 
   <>
   
-            <ShoppingCart  />
+            <ShoppingCart size={17} />
               {totalItems > 0 && 
                 <span className=" absolute top-2 left-9 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                   {totalItems}
                 </span>}
           
   </>
-)
+
   
   return (
     <header className="w-full border-b sticky top-0 bg-white z-50 shadow-sm">
@@ -80,12 +80,15 @@ const Header = () => {
           
         </button>
         
-        <Link href="/" className="flex items-center text-2xl font-bold text-primary">
+        <Link href="/" className="flex items-center text-2xl font-bold text-primary cursor-pointer hover:text-secondary">
         <Atom className="transition ease-in-out group-hover:stroke-primary" />
           Bagella
         </Link>
         </div>
-
+        <div className="flex w-full">
+            <input type="search" placeholder="Search....." className="border rounded-l-xl w-full px-5"/>
+            <Search className="border rounded-r-xl text-primary w-8 h-8 p-1" />
+            </div>
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
@@ -97,20 +100,21 @@ const Header = () => {
               {link.name}
             </Link>
           ))}
+          
           {user
           ? <>
           <UserButton>
             <UserButton.MenuItems>
               <UserButton.Action
                 label="Cart"
-                labelIcon={cartIcon()}
+                labelIcon={cartIcon}
                 onClick={() => {
                   window.location.href = "/cart"; 
                 }}
               />
               <UserButton.Action
                 label="Order"
-                labelIcon={<ListOrderedIcon />}
+                labelIcon={<ListOrderedIcon size={17} />}
                 onClick={() => {
                   window.location.href = "/order"; 
                 }}
@@ -136,14 +140,14 @@ const Header = () => {
             <UserButton.MenuItems>
               <UserButton.Action
                 label="Cart"
-                labelIcon={cartIcon()}
+                labelIcon={cartIcon}
                 onClick={() => {
                   window.location.href = "/cart"; 
                 }}
               />
               <UserButton.Action
                 label="Order"
-                labelIcon={<ListOrderedIcon />}
+                labelIcon={<ListOrderedIcon size={17}/>}
                 onClick={() => {
                   window.location.href = "/order"; 
                 }}
