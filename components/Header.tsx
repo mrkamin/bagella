@@ -100,7 +100,16 @@ const Header = () => {
               {link.name}
             </Link>
           ))}
-          
+          <Link 
+            href="/cart"
+            className="relative "
+          >
+            <ShoppingCart size={20} className="cursor-pointer text-primary"/>
+              {totalItems > 0 && 
+                <span className=" absolute -top-3 left-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                  {totalItems}
+                </span>}
+          </Link>
           {user
           ? <>
           <UserButton>

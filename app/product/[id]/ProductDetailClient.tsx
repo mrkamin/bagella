@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "@/types/Types"; // Create this if needed
+import { Product } from "@/types/Types";
 import { Button } from "@/components/ui/button";
 import { CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCart } from "@/context/Cartcontext";
@@ -95,7 +95,7 @@ export default function ProductDetailClient({ product }: Props) {
 
       <div className="mt-10">
         <Link href="/">
-          <button className="text-yellow-700 hover:underline">
+          <button className="text-primary hover:underline">
             ← Back to Home
           </button>
         </Link>
