@@ -38,7 +38,7 @@ const Header = () => {
         <div className="flex gap-4">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden relative cursor-pointer"
+          className="md:hidden text-primary relative cursor-pointer"
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
@@ -179,7 +179,7 @@ const Header = () => {
               key={link.name}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="text-gray-700 hover:text-[#d4af37] transition"
+              className="text-primary hover:text-secondary transition"
             >
               {link.name}
             </Link>
@@ -188,7 +188,7 @@ const Header = () => {
           <Link
             href="/cart"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-2 text-gray-700 hover:text-[#d4af37]"
+            className="flex items-center gap-2 text-primary hover:text-secondary"
           >
             <ShoppingCart size={20} />
               Cart {totalItems > 0 && 
