@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ShoppingCart, Atom, UserIcon, ListOrderedIcon, Search } from "lucide-react";
 import { useCart } from "@/context/Cartcontext";
 import { useClerk, UserButton } from "@clerk/nextjs";
+import { usePathname, useRouter } from "next/navigation";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -17,6 +18,8 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const {totalItems, user} = useCart();
   const {openSignIn} = useClerk();
+  const router = useRouter();
+  const pathName = usePathname()
 
   const cartIcon = 
   <>
@@ -39,6 +42,7 @@ const Header = () => {
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-primary relative cursor-pointer"
+          aria-label="Toggle Menu"
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
@@ -95,7 +99,7 @@ const Header = () => {
             <Link
               key={link.name}
               href={link.href}
-              className="text-primary hover:text-secondary transition"
+              className={ pathName === link.href ? "font-bold" : "text-primary hover:text-secondary transition"}
             >
               {link.name}
             </Link>
@@ -117,16 +121,16 @@ const Header = () => {
               <UserButton.Action
                 label="Cart"
                 labelIcon={cartIcon}
-                onClick={() => {
-                  window.location.href = "/cart"; 
-                }}
+                onClick={() => 
+                  router.push("/cart") 
+                }
               />
               <UserButton.Action
                 label="Order"
                 labelIcon={<ListOrderedIcon size={17} />}
-                onClick={() => {
-                  window.location.href = "/order"; 
-                }}
+                onClick={() => 
+                  router.push("/order") 
+                }
               />
             </UserButton.MenuItems>
           </UserButton>
@@ -150,16 +154,16 @@ const Header = () => {
               <UserButton.Action
                 label="Cart"
                 labelIcon={cartIcon}
-                onClick={() => {
-                  window.location.href = "/cart"; 
-                }}
+                onClick={() => 
+                  router.push("/cart") 
+                }
               />
               <UserButton.Action
                 label="Order"
                 labelIcon={<ListOrderedIcon size={17}/>}
-                onClick={() => {
-                  window.location.href = "/order"; 
-                }}
+                onClick={() => 
+                  router.push("/order") 
+                }
               />
             </UserButton.MenuItems>
           </UserButton>
