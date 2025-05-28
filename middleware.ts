@@ -1,13 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
+import { clerkMiddleware } from '@clerk/nextjs/server'
 
-export function middleware(request: NextRequest) {
-    const isAdmin = request.cookies.get('admin-auth')?.value === 'true';
-    if (request.nextUrl.pathname.startsWith('/admin/dashboard')&& !isAdmin) {
-        return NextResponse.redirect(new URL('/admin/login', request.url));
-    }
-    return NextResponse.next();
-}
+export default clerkMiddleware()
 
 export const config = {
-    matcher: ['/admin/dashboard/:path*'],
-};
+  matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
+  ],
+}

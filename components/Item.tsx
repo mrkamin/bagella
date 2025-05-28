@@ -27,9 +27,6 @@ const Item = ({ product }: ProductProps) => {
       quantity: 1,
     });
   };
-
-  console.log("product Code: ", product.productCode)
-console.log('Fetched product:', product);
   return (
     <Card className="flex flex-col pt-0 relative overflow-hidden">
       <div className="relative flex justify-center items-center h-60 bg-slate-100 overflow-hidden">
@@ -63,14 +60,14 @@ console.log('Fetched product:', product);
 
           <button aria-label="Add to wishlist" className="cursor-pointer group">
             <Heart className="text-primary hover:text-input" />
-            <div className="absolute -top-8 left-[25%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/80 text-xs px-2 py-1 rounded z-30 whitespace-nowrap">
+            <div className="absolute -top-6 left-[25%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/80 text-xs px-2 py-1 rounded z-30 whitespace-nowrap">
               Add To Favorite
             </div>
           </button>
 
           <button aria-label="Contact on WhatsApp" className="cursor-pointer group">
             <FaWhatsapp size={22} className="text-primary hover:text-input" />
-            <div className="absolute -top-8 right-[20%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/80 text-xs px-2 py-1 rounded z-30 whitespace-nowrap">
+            <div className="absolute -top-6 right-[20%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/80 text-xs px-2 py-1 rounded z-30 whitespace-nowrap">
               Order On Whatsapp
             </div>
           </button>
@@ -78,7 +75,7 @@ console.log('Fetched product:', product);
           <BuyDialog id={product._id.toString()}>
             <button className="cursor-pointer group">
               <ShoppingBag className="text-primary hover:text-input" />
-              <div className="absolute -top-8 right-[3%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/80 text-xs px-2 py-1 rounded z-30 whitespace-nowrap">
+              <div className="absolute -top-6 right-[3%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/80 text-xs px-2 py-1 rounded z-30 whitespace-nowrap">
                 Buy Now
               </div>
             </button>
@@ -89,9 +86,9 @@ console.log('Fetched product:', product);
       {/* Product Info */}
       <CardHeader className="text-xl relative">
         <Link href={`/product/${product._id}`} className="w-full h-full absolute inset-0 z-10" aria-label="View product details" />
-        <CardTitle>{product.name}</CardTitle>
+        <CardTitle className='text-primary'>{product.name}</CardTitle>
        
-  <p className="text-sm text-gray-600">Product Code: {product.productCode}</p>
+  <p className="text-sm text-gray-800">Product Code: {product.productCode}</p>
 
         <CardDescription className="text-pretty">
           {product.description.length > 50

@@ -19,7 +19,7 @@ export default function CartPage() {
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-yellow-700 mb-6">Your Cart</h1>
+      <h1 className="text-3xl font-bold text-primary mb-6">Your Cart</h1>
 
       {cart.length === 0 ? (
         <p className="text-gray-600">Your cart is empty.</p>
@@ -36,7 +36,7 @@ export default function CartPage() {
                   className="object-contain"
                 />
                 <div>
-                  <h2 className="font-semibold text-yellow-800">{item.name}</h2>
+                  <h2 className="font-semibold text-primary">{item.name}</h2>
                   <p>{item.quantity} × {item.price}</p>
                 </div>
               </div>
@@ -75,7 +75,7 @@ export default function CartPage() {
           <div className="mt-4 flex flex-col sm:flex-row gap-4">
             <button
               onClick={clearCart}
-              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+              className="px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600"
             >
               Clear Cart
             </button>
@@ -85,7 +85,7 @@ export default function CartPage() {
           </div>
           <div className="mt-10">
             <Link href="/">
-              <button className="text-yellow-700 hover:underline">
+              <button className="text-primary hover:underline">
                 ← Back to Home
               </button>
             </Link>
