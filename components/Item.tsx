@@ -27,9 +27,6 @@ const Item = ({ product }: ProductProps) => {
       quantity: 1,
     });
   };
-
-  console.log("product Code: ", product.productCode)
-console.log('Fetched product:', product);
   return (
     <Card className="flex flex-col pt-0 relative overflow-hidden">
       <div className="relative flex justify-center items-center h-60 bg-slate-100 overflow-hidden">
@@ -89,9 +86,9 @@ console.log('Fetched product:', product);
       {/* Product Info */}
       <CardHeader className="text-xl relative">
         <Link href={`/product/${product._id}`} className="w-full h-full absolute inset-0 z-10" aria-label="View product details" />
-        <CardTitle>{product.name}</CardTitle>
+        <CardTitle className='text-primary'>{product.name}</CardTitle>
        
-  <p className="text-sm text-gray-600">Product Code: {product.productCode}</p>
+  <p className="text-sm text-gray-800">Product Code: {product.productCode}</p>
 
         <CardDescription className="text-pretty">
           {product.description.length > 50
